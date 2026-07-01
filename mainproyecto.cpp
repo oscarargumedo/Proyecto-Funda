@@ -10,10 +10,7 @@ int opcop = 1, opcion = 1;
 {
     do
     {
-        cout << "Bienvenido a Cafeteria UCA" << endl
-             << "Seleccione una opcion: " << endl
-             << "1)Realizar pedido" << endl
-             << "2)Salir" << endl;
+        menuprincipal();
         cin >> opcion;
         if (opcion == 1)
         {
@@ -27,3 +24,5 @@ int opcop = 1, opcion = 1;
     } while (opcop == 1);
     return 0;
 }
+
+void menuprincipal ();
