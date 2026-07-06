@@ -294,7 +294,7 @@ int main()
                             }
                         }
                     }
-                    // Seccion de pago //andre
+                    // Seccion de pago 
                     else
                     {
                         division();
