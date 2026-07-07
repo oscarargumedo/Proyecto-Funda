@@ -26,16 +26,17 @@ float efectivo, cambio = 0, subtotal = 0, total = 0;
 int opceditar, opcagregar, opceliminar, elemento, opcpago;
 string tarjeta;
 
-//variables de factura
+// variables de factura
 
-int numerodefactura=1;
-string tipodesayuno[]={"Desayuno típico", "Pancakes", "Sándwich"}, tipoalmuerzo[]={"Pechuga de pollo", "Carne de res", "Ensalada universitaria"}, tipocena[]={"Sándwich", "Cena típica", "Mega Dog"};
+int numerodefactura = 1;
+string tipodesayuno[] = {"Desayuno típico", "Pancakes", "Sándwich"}, tipoalmuerzo[] = {"Pechuga de pollo", "Carne de res", "Ensalada universitaria"}, tipocena[] = {"Sándwich", "Cena típica", "Mega Dog"};
 string clientenombre;
 
 // Inicio del programa
 int main()
 {
     SetConsoleOutputCP(CP_UTF8);
+
     division();
     menuprincipal();
     cin >> opcion;
@@ -45,15 +46,16 @@ int main()
     {
         do
         {
-            cout<<"Porfavor ingrese su nombre: ";
-            getline (cin, clientenombre); 
-        // Reinicio de variables para nuevo pedido
+            cout << "Por favor, ingrese su nombre: ";
+            getline(cin, clientenombre);
+            // Reinicio de variables para nuevo pedido
             total = 0;
             subtotal = 0;
             cambio = 0;
-            
+
             // Reinicio de los elementos pedidos
-            for(int i = 0; i < 3; i++) {
+            for (int i = 0; i < 3; i++)
+            {
                 desayuno[i].ped = 0;
                 almuerzo[i].ped = 0;
                 cena[i].ped = 0;
@@ -66,13 +68,18 @@ int main()
                 do
                 {
                     division();
-                    cout << "Menús" << endl
-                         << "1) Desayunos" << endl
-                         << "2) Almuerzos" << endl
-                         << "3) Cenas" << endl
-                         << "4) Bebidas" << endl;
-                    cin >> opcmenu;
-
+                    menuN2();
+                    cout << "Elija una opcion: " << endl;
+                    do
+                    {
+                        cin >> opcmenu;
+                        if (opcmenu < 1 || opcmenu > 4)
+                        {
+                           cout<< "Ingrese una opcion valida"<<endl;
+                        }
+                        
+                    } while (opcmenu < 1 || opcmenu > 4);
+                    
                     switch (opcmenu)
                     {
                     case 1:
@@ -83,7 +90,14 @@ int main()
                             cout << i + 1 << ") " << desayuno[i].menu
                                  << " --- $" << desayuno[i].precio << " --- Disponibles: " << desayuno[i].cant << endl;
                         }
-                        cin >> opcplato;
+                          do
+                        {
+                            cin >> opcplato;
+                        if (opcplato < 1 || opcplato > 3)
+                        {
+                            cout << "Ingrese una opcion válida." << endl;
+                        }
+                        } while (opcplato < 1 || opcplato > 3);
                         cout << "Elija la cantidad: ";
                         cin >> opcant;
 
@@ -91,7 +105,7 @@ int main()
 
                         if (desayuno[opcplato - 1].cant < 0)
                         {
-                            cout << "No hay platos suficientes en existencia" << endl;
+                            avisoexistencias();
                             desayuno[opcplato - 1].cant = desayuno[opcplato - 1].cant + opcant;
                         }
                         else
@@ -110,15 +124,21 @@ int main()
                             cout << i + 1 << ") " << almuerzo[i].menu
                                  << " --- $" << almuerzo[i].precio << " --- Disponibles: " << almuerzo[i].cant << endl;
                         }
-                        cin >> opcplato;
-                        cout << "Elija la cantidad: ";
+                          do
+                        {
+                            cin >> opcplato;
+                        if (opcplato < 1 || opcplato > 3)
+                        {
+                            cout << "Ingrese una opcion válida." << endl;
+                        }
+                        } while (opcplato < 1 || opcplato > 3);
                         cin >> opcant;
 
                         almuerzo[opcplato - 1].cant = almuerzo[opcplato - 1].cant - opcant;
 
                         if (almuerzo[opcplato - 1].cant < 0)
                         {
-                            cout << "No hay platos suficientes en existencia" << endl;
+                            avisoexistencias();
                             almuerzo[opcplato - 1].cant = almuerzo[opcplato - 1].cant + opcant;
                         }
                         else
@@ -137,7 +157,14 @@ int main()
                             cout << i + 1 << ") " << cena[i].menu
                                  << " --- $" << cena[i].precio << " --- Disponibles: " << cena[i].cant << endl;
                         }
-                        cin >> opcplato;
+                          do
+                        {
+                            cin >> opcplato;
+                        if (opcplato < 1 || opcplato > 3)
+                        {
+                            cout << "Ingrese una opcion válida." << endl;
+                        }
+                        } while (opcplato < 1 || opcplato > 3);
                         cout << "Elija la cantidad: ";
                         cin >> opcant;
 
@@ -145,7 +172,7 @@ int main()
 
                         if (cena[opcplato - 1].cant < 0)
                         {
-                            cout << "No hay platos suficientes en existencia" << endl;
+                            avisoexistencias();
                             cena[opcplato - 1].cant = cena[opcplato - 1].cant + opcant;
                         }
                         else
@@ -164,7 +191,14 @@ int main()
                             cout << i + 1 << ") " << bebida[i].menu
                                  << " --- $" << bebida[i].precio << " --- Disponibles: " << bebida[i].cant << endl;
                         }
-                        cin >> opcplato;
+                          do
+                        {
+                            cin >> opcplato;
+                        if (opcplato < 1 || opcplato > 3)
+                        {
+                            cout << "Ingrese una opcion válida." << endl;
+                        }
+                        } while (opcplato < 1 || opcplato > 3);
                         cout << "Elija la cantidad: ";
                         cin >> opcant;
 
@@ -172,7 +206,7 @@ int main()
 
                         if (bebida[opcplato - 1].cant < 0)
                         {
-                            cout << "No hay platos suficientes en existencia" << endl;
+                            avisoexistencias();
                             bebida[opcplato - 1].cant = bebida[opcplato - 1].cant + opcant;
                         }
                         else
@@ -236,8 +270,8 @@ int main()
 
                     if (opceditar == 1)
                     {
-                        cout << "1) agregar" << endl;
-                        cout << "2) eliminar" << endl;
+                        cout << "1)Agregar" << endl;
+                        cout << "2)Eliminar" << endl;
                         cin >> opcagregar;
 
                         if (opcagregar == 1)
@@ -248,9 +282,7 @@ int main()
                         else
                         {
                             division();
-                            cout << "--- Eliminar elementos ---" << endl;
-                            cout << "1) Eliminar un platillo" << endl;
-                            cout << "2) Cancelar todo el pedido" << endl;
+                            menuEliminar();
                             cin >> opceliminar;
 
                             if (opceliminar == 1)
@@ -268,28 +300,28 @@ int main()
                                     total -= (desayuno[elemento - 1].ped * desayuno[elemento - 1].precio);
                                     desayuno[elemento - 1].cant += desayuno[elemento - 1].ped;
                                     desayuno[elemento - 1].ped = 0;
-                                    cout << "¡Desayuno eliminado!" << endl;
+                                    cout << "Desayuno eliminado" << endl;
                                 }
                                 else if (cat_eliminar == 2 && almuerzo[elemento - 1].ped > 0)
                                 {
                                     total -= (almuerzo[elemento - 1].ped * almuerzo[elemento - 1].precio);
                                     almuerzo[elemento - 1].cant += almuerzo[elemento - 1].ped;
                                     almuerzo[elemento - 1].ped = 0;
-                                    cout << "Almuerzo eliminado!" << endl;
+                                    cout << "Almuerzo eliminado" << endl;
                                 }
                                 else if (cat_eliminar == 3 && cena[elemento - 1].ped > 0)
                                 {
                                     total -= (cena[elemento - 1].ped * cena[elemento - 1].precio);
                                     cena[elemento - 1].cant += cena[elemento - 1].ped;
                                     cena[elemento - 1].ped = 0;
-                                    cout << "Cena eliminada!" << endl;
+                                    cout << "Cena eliminada" << endl;
                                 }
                                 else if (cat_eliminar == 4 && bebida[elemento - 1].ped > 0)
                                 {
                                     total -= (bebida[elemento - 1].ped * bebida[elemento - 1].precio);
                                     bebida[elemento - 1].cant += bebida[elemento - 1].ped;
                                     bebida[elemento - 1].ped = 0;
-                                    cout << "Bebida eliminada!" << endl;
+                                    cout << "Bebida eliminada" << endl;
                                 }
                                 else
                                 {
@@ -304,14 +336,14 @@ int main()
                             }
                         }
                     }
-                    // Seccion de pago       
+                    // Seccion de pago
                     else
                     {
-                        //inicio a crear factura
+                        // inicio a crear factura
                         iniciofactura();
                         guardarfactura();
                         numerodefactura++;
-                        // Opcion de pago
+                        // Opción de pago
                         cout << endl
                              << "1)Efectivo" << endl
                              << "2)Tarjeta" << endl;
@@ -326,7 +358,7 @@ int main()
                                 cin >> efectivo;
                                 if (efectivo < total)
                                 {
-                                    cout <<"El monto ingresado no puede ser menor que el total"<< endl;
+                                    cout << "El monto ingresado no puede ser menor que el total" << endl;
                                 }
                             } while (efectivo < total);
                             cambio = efectivo - total;
@@ -341,6 +373,7 @@ int main()
                             cout << "Su cambio es de: $" << cambio << endl;
                             break;
                         default:
+
                             break;
                         }
                         cout << "¡Gracias por su compra!" << endl;
@@ -350,7 +383,10 @@ int main()
                 }
             }
             division();
-            cout <<"¿Desea realizar otro pedido?"<< endl<<"1)Nuevo pedido"<< endl<<"2)Salir del programa" << endl<< "Opción: ";
+            cout << "¿Desea realizar otro pedido?" << endl
+                 << "1)Nuevo pedido" << endl
+                 << "2)Salir del programa" << endl
+                 << "Opción: ";
             cin >> opcop;
             cin.ignore();
         } while (opcop == 1);
@@ -359,180 +395,205 @@ int main()
     return 0;
 }
 
-
-//funciones de factura
-void iniciofactura(){
-    cout<<" _________________________________________________________________ "<<endl;
-    cout<<"|  Cafeteria UCA                                                  |"<<endl;
-    cout<<"|  FACTURA      # "<<numerodefactura<<"                                               |"<<endl;
-    cout<<"|-----------------------------------------------------------------|"<<endl;
-    cout<<"  Cliente: "<<clientenombre<<endl;
-    cout<<"|-----------------------------------------------------------------|"<<endl;
-    cout<<"|  CONCEPTO                           | CANTIDAD | PRECIO | TOTAL |"<<endl;
+// funciones de factura
+void iniciofactura()
+{
+    cout << " _________________________________________________________________ " << endl;
+    cout << "|  Cafetería UCA                                                  |" << endl;
+    cout << "|  FACTURA      # " << numerodefactura << "                                               |" << endl;
+    cout << "|-----------------------------------------------------------------|" << endl;
+    cout << "  Cliente: " << clientenombre << endl;
+    cout << "|-----------------------------------------------------------------|" << endl;
+    cout << "|  CONCEPTO                           | CANTIDAD | PRECIO | TOTAL |" << endl;
     for (int i = 0; i < 3; i++)
     {
         if (desayuno[i].ped > 0)
-        {switch(i){
+        {
+            switch (i)
+            {
             case 0:
-            //                 concepto                                  cantidad                     precio                                         total
-            cout<<"   "<< tipodesayuno[i]<<"                    |    "<<desayuno[i].ped <<"     |  $"<<desayuno[i].precio<<"  |  $"<<desayuno[i].ped * desayuno[i].precio<<endl;
-            break;
+                //                 concepto                                  cantidad                     precio                                         total
+                cout << "   " << tipodesayuno[i] << "                    |    " << desayuno[i].ped << "     |  $" << desayuno[i].precio << "  |  $" << desayuno[i].ped * desayuno[i].precio << endl;
+                break;
             case 1:
-            cout<<"   "<< tipodesayuno[i]<<"                           |    "<<desayuno[i].ped <<"     |  $"<<desayuno[i].precio<<"    |  $"<<desayuno[i].ped * desayuno[i].precio<<endl;
-            break;
+                cout << "   " << tipodesayuno[i] << "                           |    " << desayuno[i].ped << "     |  $" << desayuno[i].precio << "    |  $" << desayuno[i].ped * desayuno[i].precio << endl;
+                break;
             case 2:
-            cout<<"   "<< tipodesayuno[i]<<"                           |    "<<desayuno[i].ped <<"     |  $"<<desayuno[i].precio<<"  |  $"<<desayuno[i].ped * desayuno[i].precio<<endl;
-            break;
-            default: "Nunca entra aqui :)" ;
-        }
+                cout << "   " << tipodesayuno[i] << "                           |    " << desayuno[i].ped << "     |  $" << desayuno[i].precio << "  |  $" << desayuno[i].ped * desayuno[i].precio << endl;
+                break;
+            default:
+                "Nunca entra aquí :)";
+            }
         }
     }
     for (int i = 0; i < 3; i++)
     {
         if (almuerzo[i].ped > 0)
-        {switch(i){
+        {
+            switch (i)
+            {
             case 0:
-            //                 concepto                                  cantidad                     precio                                         total
-            cout<<"   "<< tipoalmuerzo[i]<<"                   |    "<<almuerzo[i].ped <<"     |  $"<<almuerzo[i].precio<<"    |  $"<<almuerzo[i].ped * almuerzo[i].precio<<endl;
-            break;
+                //                 concepto                                  cantidad                     precio                                         total
+                cout << "   " << tipoalmuerzo[i] << "                   |    " << almuerzo[i].ped << "     |  $" << almuerzo[i].precio << "    |  $" << almuerzo[i].ped * almuerzo[i].precio << endl;
+                break;
             case 1:
-            cout<<"   "<< tipoalmuerzo[i]<<"                       |    "<<almuerzo[i].ped <<"     |  $"<<almuerzo[i].precio<<"    |  $"<<almuerzo[i].ped * almuerzo[i].precio<<endl;
-            break;
+                cout << "   " << tipoalmuerzo[i] << "                       |    " << almuerzo[i].ped << "     |  $" << almuerzo[i].precio << "    |  $" << almuerzo[i].ped * almuerzo[i].precio << endl;
+                break;
             case 2:
-            cout<<"   "<< tipoalmuerzo[i]<<"             |    "<<almuerzo[i].ped <<"     |  $"<<almuerzo[i].precio<<"  |  $"<<almuerzo[i].ped * almuerzo[i].precio<<endl;
-            break;
-            default: "Nunca entra aqui :)" ;
-        }//done
+                cout << "   " << tipoalmuerzo[i] << "             |    " << almuerzo[i].ped << "     |  $" << almuerzo[i].precio << "  |  $" << almuerzo[i].ped * almuerzo[i].precio << endl;
+                break;
+            default:
+                "Nunca entra aquí :)";
+            } // done
         }
     }
     for (int i = 0; i < 3; i++)
     {
         if (cena[i].ped > 0)
-        {switch(i){
+        {
+            switch (i)
+            {
             case 0:
-            //                 concepto                                  cantidad                     precio                                         total
-            cout<<"   "<< tipocena[i]<<"                           |    "<<cena[i].ped <<"     |  $"<<cena[i].precio<<" |  $"<<cena[i].ped * cena[i].precio<<endl;
-            break;
+                //                 concepto                                  cantidad                     precio                                         total
+                cout << "   " << tipocena[i] << "                           |    " << cena[i].ped << "     |  $" << cena[i].precio << " |  $" << cena[i].ped * cena[i].precio << endl;
+                break;
             case 1:
-            cout<<"   "<< tipocena[i]<<"                        |    "<<cena[i].ped <<"     |  $"<<cena[i].precio<<"    |  $"<<cena[i].ped * cena[i].precio<<endl;
-            break;
+                cout << "   " << tipocena[i] << "                        |    " << cena[i].ped << "     |  $" << cena[i].precio << "    |  $" << cena[i].ped * cena[i].precio << endl;
+                break;
             case 2:
-            cout<<"   "<< tipocena[i]<<"                           |    "<<cena[i].ped <<"     |  $"<<cena[i].precio<<" |  $"<<cena[i].ped * cena[i].precio<<endl;
-            break;
-            default: "Nunca entra aqui :)" ;
-        }
+                cout << "   " << tipocena[i] << "                           |    " << cena[i].ped << "     |  $" << cena[i].precio << " |  $" << cena[i].ped * cena[i].precio << endl;
+                break;
+            default:
+                "Nunca entra aquí :)";
+            }
         }
     }
     for (int i = 0; i < 3; i++)
     {
         if (bebida[i].ped > 0)
-        {switch(i){
+        {
+            switch (i)
+            {
             case 0:
-            //                 concepto                            cantidad                     precio                                         total
-            cout <<"   "<< bebida[i].menu << "                     |    " << bebida[i].ped <<"     |  $"<<bebida[i].precio<< "  |  $" << bebida[i].ped * bebida[i].precio<< endl;
-            break;
+                //                 concepto                            cantidad                     precio                                         total
+                cout << "   " << bebida[i].menu << "                     |    " << bebida[i].ped << "     |  $" << bebida[i].precio << "  |  $" << bebida[i].ped * bebida[i].precio << endl;
+                break;
             case 1:
-            cout <<"   "<< bebida[i].menu << "                  |    " << bebida[i].ped <<"     |  $"<<bebida[i].precio<< " |  $" << bebida[i].ped * bebida[i].precio<< endl;
-            break;
+                cout << "   " << bebida[i].menu << "                  |    " << bebida[i].ped << "     |  $" << bebida[i].precio << " |  $" << bebida[i].ped * bebida[i].precio << endl;
+                break;
             case 2:
-            cout <<"   "<< bebida[i].menu << "                  |    " << bebida[i].ped <<"     |  $"<<bebida[i].precio<< " |  $" << bebida[i].ped * bebida[i].precio<< endl;
-            break;
-            default: "Nunca entra aqui :)" ;
-        }
+                cout << "   " << bebida[i].menu << "                  |    " << bebida[i].ped << "     |  $" << bebida[i].precio << " |  $" << bebida[i].ped * bebida[i].precio << endl;
+                break;
+            default:
+                "Nunca entra aquí :)";
+            }
         }
     }
-    cout<<"                                                                  "<<endl;
-    cout<<"   TOTAL A PAGAR                                        $"<<total<<"  "<<endl;
-    cout<<"|-----------------------------------------------------------------|"<<endl;
+    cout << "                                                                  " << endl;
+    cout << "   TOTAL A PAGAR                                        $" << total << "  " << endl;
+    cout << "|-----------------------------------------------------------------|" << endl;
 }
 
-void guardarfactura(){
+void guardarfactura()
+{
     ofstream archivo;
     archivo.open("Facturas.txt", ios::app);
-    archivo<<endl;
-    archivo<<" _________________________________________________________________ "<<endl;
-    archivo<<"|  Cafeteria UCA                                                  |"<<endl;
-    archivo<<"|  FACTURA      # "<<numerodefactura<<"                                               |"<<endl;
-    archivo<<"|-----------------------------------------------------------------|"<<endl;
-    archivo<<"  Cliente: "<<clientenombre<<endl;
-    archivo<<"|-----------------------------------------------------------------|"<<endl;
-    archivo<<"|  CONCEPTO                           | CANTIDAD | PRECIO | TOTAL |"<<endl;
+    archivo << endl;
+    archivo << " _________________________________________________________________ " << endl;
+    archivo << "|  Cafetería UCA                                                  |" << endl;
+    archivo << "|  FACTURA      # " << numerodefactura << "                                               |" << endl;
+    archivo << "|-----------------------------------------------------------------|" << endl;
+    archivo << "  Cliente: " << clientenombre << endl;
+    archivo << "|-----------------------------------------------------------------|" << endl;
+    archivo << "|  CONCEPTO                           | CANTIDAD | PRECIO | TOTAL |" << endl;
 
-    //archivo.close();
+    // archivo.close();
     for (int i = 0; i < 3; i++)
     {
         if (desayuno[i].ped > 0)
-        {switch(i){
+        {
+            switch (i)
+            {
             case 0:
-            //                 concepto                                  cantidad                     precio                                         total
-            archivo<<"   "<< tipodesayuno[i]<<"                    |    "<<desayuno[i].ped <<"     |  $"<<desayuno[i].precio<<"  |  $"<<desayuno[i].ped * desayuno[i].precio<<endl;
-            break;
+                //                 concepto                                  cantidad                     precio                                         total
+                archivo << "   " << tipodesayuno[i] << "                    |    " << desayuno[i].ped << "     |  $" << desayuno[i].precio << "  |  $" << desayuno[i].ped * desayuno[i].precio << endl;
+                break;
             case 1:
-            archivo<<"   "<< tipodesayuno[i]<<"                           |    "<<desayuno[i].ped <<"     |  $"<<desayuno[i].precio<<"    |  $"<<desayuno[i].ped * desayuno[i].precio<<endl;
-            break;
+                archivo << "   " << tipodesayuno[i] << "                           |    " << desayuno[i].ped << "     |  $" << desayuno[i].precio << "    |  $" << desayuno[i].ped * desayuno[i].precio << endl;
+                break;
             case 2:
-            archivo<<"   "<< tipodesayuno[i]<<"                           |    "<<desayuno[i].ped <<"     |  $"<<desayuno[i].precio<<"  |  $"<<desayuno[i].ped * desayuno[i].precio<<endl;
-            break;
-            default: "Nunca entra aqui :)" ;
-        }
+                archivo << "   " << tipodesayuno[i] << "                           |    " << desayuno[i].ped << "     |  $" << desayuno[i].precio << "  |  $" << desayuno[i].ped * desayuno[i].precio << endl;
+                break;
+            default:
+                "Nunca entra aquí :)";
+            }
         }
     }
     for (int i = 0; i < 3; i++)
     {
         if (almuerzo[i].ped > 0)
-        {switch(i){
+        {
+            switch (i)
+            {
             case 0:
-            //                 concepto                                  cantidad                     precio                                         total
-            archivo<<"   "<< tipoalmuerzo[i]<<"                   |    "<<almuerzo[i].ped <<"     |  $"<<almuerzo[i].precio<<"    |  $"<<almuerzo[i].ped * almuerzo[i].precio<<endl;
-            break;
+                //                 concepto                                  cantidad                     precio                                         total
+                archivo << "   " << tipoalmuerzo[i] << "                   |    " << almuerzo[i].ped << "     |  $" << almuerzo[i].precio << "    |  $" << almuerzo[i].ped * almuerzo[i].precio << endl;
+                break;
             case 1:
-            archivo<<"   "<< tipoalmuerzo[i]<<"                       |    "<<almuerzo[i].ped <<"     |  $"<<almuerzo[i].precio<<"    |  $"<<almuerzo[i].ped * almuerzo[i].precio<<endl;
-            break;
+                archivo << "   " << tipoalmuerzo[i] << "                       |    " << almuerzo[i].ped << "     |  $" << almuerzo[i].precio << "    |  $" << almuerzo[i].ped * almuerzo[i].precio << endl;
+                break;
             case 2:
-            archivo<<"   "<< tipoalmuerzo[i]<<"             |    "<<almuerzo[i].ped <<"     |  $"<<almuerzo[i].precio<<"  |  $"<<almuerzo[i].ped * almuerzo[i].precio<<endl;
-            break;
-            default: "Nunca entra aqui :)" ;
-        }//done
+                archivo << "   " << tipoalmuerzo[i] << "             |    " << almuerzo[i].ped << "     |  $" << almuerzo[i].precio << "  |  $" << almuerzo[i].ped * almuerzo[i].precio << endl;
+                break;
+            default:
+                "Nunca entra aquí :)";
+            } // done
         }
     }
     for (int i = 0; i < 3; i++)
     {
         if (cena[i].ped > 0)
-        {switch(i){
+        {
+            switch (i)
+            {
             case 0:
-            //                 concepto                                  cantidad                     precio                                         total
-            archivo<<"   "<< tipocena[i]<<"                           |    "<<cena[i].ped <<"     |  $"<<cena[i].precio<<" |  $"<<cena[i].ped * cena[i].precio<<endl;
-            break;
+                //                 concepto                                  cantidad                     precio                                         total
+                archivo << "   " << tipocena[i] << "                           |    " << cena[i].ped << "     |  $" << cena[i].precio << " |  $" << cena[i].ped * cena[i].precio << endl;
+                break;
             case 1:
-            archivo<<"   "<< tipocena[i]<<"                        |    "<<cena[i].ped <<"     |  $"<<cena[i].precio<<"    |  $"<<cena[i].ped * cena[i].precio<<endl;
-            break;
+                archivo << "   " << tipocena[i] << "                        |    " << cena[i].ped << "     |  $" << cena[i].precio << "    |  $" << cena[i].ped * cena[i].precio << endl;
+                break;
             case 2:
-            archivo<<"   "<< tipocena[i]<<"                           |    "<<cena[i].ped <<"     |  $"<<cena[i].precio<<" |  $"<<cena[i].ped * cena[i].precio<<endl;
-            break;
-            default: "Nunca entra aqui :)" ;
-        }
+                archivo << "   " << tipocena[i] << "                           |    " << cena[i].ped << "     |  $" << cena[i].precio << " |  $" << cena[i].ped * cena[i].precio << endl;
+                break;
+            default:
+                "Nunca entra aquí :)";
+            }
         }
     }
     for (int i = 0; i < 3; i++)
     {
         if (bebida[i].ped > 0)
-        {switch(i){
+        {
+            switch (i)
+            {
             case 0:
-            //                 concepto                            cantidad                     precio                                         total
-            archivo <<"   "<< bebida[i].menu << "                     |    " << bebida[i].ped <<"     |  $"<<bebida[i].precio<< "  |  $" << bebida[i].ped * bebida[i].precio<< endl;
-            break;
+                //                 concepto                            cantidad                     precio                                         total
+                archivo << "   " << bebida[i].menu << "                     |    " << bebida[i].ped << "     |  $" << bebida[i].precio << "  |  $" << bebida[i].ped * bebida[i].precio << endl;
+                break;
             case 1:
-            archivo <<"   "<< bebida[i].menu << "                  |    " << bebida[i].ped <<"     |  $"<<bebida[i].precio<< " |  $" << bebida[i].ped * bebida[i].precio<< endl;
-            break;
+                archivo << "   " << bebida[i].menu << "                  |    " << bebida[i].ped << "     |  $" << bebida[i].precio << " |  $" << bebida[i].ped * bebida[i].precio << endl;
+                break;
             case 2:
-            archivo <<"   "<< bebida[i].menu << "                  |    " << bebida[i].ped <<"     |  $"<<bebida[i].precio<< " |  $" << bebida[i].ped * bebida[i].precio<< endl;
-            break;
-            default: "Nunca entra aqui :)" ;
-        }
+                archivo << "   " << bebida[i].menu << "                  |    " << bebida[i].ped << "     |  $" << bebida[i].precio << " |  $" << bebida[i].ped * bebida[i].precio << endl;
+                break;
+            default:
+                "Nunca entra aquí :)";
+            }
         }
     }
-    archivo<<"                                                                  "<<endl;
-    archivo<<"   TOTAL A PAGAR                                        $"<<total<<"  "<<endl;
-    archivo<<"|-----------------------------------------------------------------|"<<endl;
+    archivo << "                                                                  " << endl;
+    archivo << "   TOTAL A PAGAR                                        $" << total << "  " << endl;
+    archivo << "|-----------------------------------------------------------------|" << endl;
     archivo.close();
 }
