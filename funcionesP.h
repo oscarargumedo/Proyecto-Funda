@@ -3,5 +3,7 @@
 
 void menuprincipal ();
 void division();
+void iniciofactura();
+void guardarfactura();
 
 #endif
