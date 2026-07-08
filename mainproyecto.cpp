@@ -39,9 +39,16 @@ int main()
 
     division();
     menuprincipal();
-    cin >> opcion;
+     do
+                        {
+                            cin >> opcion;
+                        if (opcion < 1 || opcion > 2)
+                        {
+                            cout << "Ingrese una opción válida." << endl;
+                        }
+                        } while (opcion < 1 || opcion > 2);
+    
     cin.ignore();
-
     if (opcion == 1)
     {
         do
@@ -232,7 +239,15 @@ int main()
                     cout << "Subtotal actual del carrito: $" << total << endl;
                     cout << "1) Agregar" << endl;
                     cout << "2) Avanzar" << endl;
-                    cin >> opcag;
+                    do
+                        {
+                            cin >> opcag;
+                        if (opcag < 1 || opcag > 2)
+                        {
+                            cout << "Ingrese una opción válida." << endl;
+                        }
+                        } while (opcag < 1 || opcag > 2);
+                    
 
                 } while (opcag == 1);
                 // SECCIÓN DE EDICIÓN (Valgame que dolor fue estooo)
@@ -270,6 +285,7 @@ int main()
 
                     cout << "1) Editar pedido" << endl;
                     cout << "2) Pagar" << endl;
+                    
                     cin >> opceditar;
 
                     if (opceditar == 1)
@@ -277,7 +293,15 @@ int main()
                         division();
                         cout << "1)Agregar" << endl;
                         cout << "2)Eliminar" << endl;
-                        cin >> opcagregar;
+                         do
+                        {
+                            cin >> opcagregar;
+                        if (opcagregar < 1 || opcagregar > 2)
+                        {
+                            cout << "Ingrese una opción válida." << endl;
+                        }
+                        } while (opcagregar < 1 || opcagregar > 2);
+                        
 
                         if (opcagregar == 1)
                         {
