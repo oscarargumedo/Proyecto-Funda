@@ -339,6 +339,11 @@ int main()
                     // Seccion de pago
                     else
                     {
+                        //Aplicar descuento si el total es mayor o igual a $25
+                        if (total>=25)
+                        {
+                        total = total-(total*0.15);
+                        }
                         // inicio a crear factura
                         iniciofactura();
                         guardarfactura();
