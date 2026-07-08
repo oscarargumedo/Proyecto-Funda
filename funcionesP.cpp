@@ -5,8 +5,8 @@ using namespace std;
 //funciones
 void menuprincipal ()
 {
-cout<<"Bienvenido a Cafeteria UCA" << endl
-             << "Seleccione una opcion: " << endl
+cout<<"Bienvenido a Cafetería UCA" << endl
+             << "Seleccione una opción: " << endl
              << "1)Realizar pedido" << endl
              << "2)Salir" << endl;
 }

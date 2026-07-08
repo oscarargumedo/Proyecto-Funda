@@ -69,13 +69,13 @@ int main()
                 {
                     division();
                     menuN2();
-                    cout << "Elija una opcion: " << endl;
+                    cout << "Elija una opción: " << endl;
                     do
                     {
                         cin >> opcmenu;
                         if (opcmenu < 1 || opcmenu > 4)
                         {
-                           cout<< "Ingrese una opcion valida"<<endl;
+                           cout<< "Ingrese una opción válida"<<endl;
                         }
                         
                     } while (opcmenu < 1 || opcmenu > 4);
@@ -90,12 +90,13 @@ int main()
                             cout << i + 1 << ") " << desayuno[i].menu
                                  << " --- $" << desayuno[i].precio << " --- Disponibles: " << desayuno[i].cant << endl;
                         }
+                        cout<<"Elija una opción: ";
                           do
                         {
                             cin >> opcplato;
                         if (opcplato < 1 || opcplato > 3)
                         {
-                            cout << "Ingrese una opcion válida." << endl;
+                            cout << "Ingrese una opción válida." << endl;
                         }
                         } while (opcplato < 1 || opcplato > 3);
                         cout << "Elija la cantidad: ";
@@ -124,14 +125,16 @@ int main()
                             cout << i + 1 << ") " << almuerzo[i].menu
                                  << " --- $" << almuerzo[i].precio << " --- Disponibles: " << almuerzo[i].cant << endl;
                         }
+                        cout<<"Elija una opción: ";
                           do
                         {
                             cin >> opcplato;
                         if (opcplato < 1 || opcplato > 3)
                         {
-                            cout << "Ingrese una opcion válida." << endl;
+                            cout << "Ingrese una opción válida." << endl;
                         }
                         } while (opcplato < 1 || opcplato > 3);
+                        cout<<"Elija la cantidad: ";
                         cin >> opcant;
 
                         almuerzo[opcplato - 1].cant = almuerzo[opcplato - 1].cant - opcant;
@@ -157,12 +160,13 @@ int main()
                             cout << i + 1 << ") " << cena[i].menu
                                  << " --- $" << cena[i].precio << " --- Disponibles: " << cena[i].cant << endl;
                         }
+                        cout<<"Elija una opción: ";
                           do
                         {
                             cin >> opcplato;
                         if (opcplato < 1 || opcplato > 3)
                         {
-                            cout << "Ingrese una opcion válida." << endl;
+                            cout << "Ingrese una opción válida." << endl;
                         }
                         } while (opcplato < 1 || opcplato > 3);
                         cout << "Elija la cantidad: ";
@@ -191,12 +195,13 @@ int main()
                             cout << i + 1 << ") " << bebida[i].menu
                                  << " --- $" << bebida[i].precio << " --- Disponibles: " << bebida[i].cant << endl;
                         }
+                        cout<<"Elija una opción: ";
                           do
                         {
                             cin >> opcplato;
                         if (opcplato < 1 || opcplato > 3)
                         {
-                            cout << "Ingrese una opcion válida." << endl;
+                            cout << "Ingrese una opción válida." << endl;
                         }
                         } while (opcplato < 1 || opcplato > 3);
                         cout << "Elija la cantidad: ";
@@ -230,7 +235,6 @@ int main()
                     cin >> opcag;
 
                 } while (opcag == 1);
-
                 // SECCIÓN DE EDICIÓN (Valgame que dolor fue estooo)
 
                 bool menu_edicion = true;
@@ -239,7 +243,7 @@ int main()
                     division();
                     cout << "--- Pedido actual ---" << endl;
 
-                    // Impresión separada por categorías porque no se me ocurrio una mejor una idea xd
+                    // Impresión separada por categorías
                     cout << "--- 1) Desayunos ---" << endl;
                     for (int i = 0; i < 3; i++)
                         if (desayuno[i].ped > 0)
@@ -264,12 +268,13 @@ int main()
                     cout << "Total Actual: $" << total << endl;
                     division();
 
-                    cout << "1) editar pedido" << endl;
-                    cout << "2) pagar" << endl;
+                    cout << "1) Editar pedido" << endl;
+                    cout << "2) Pagar" << endl;
                     cin >> opceditar;
 
                     if (opceditar == 1)
                     {
+                        division();
                         cout << "1)Agregar" << endl;
                         cout << "2)Eliminar" << endl;
                         cin >> opcagregar;
@@ -345,6 +350,7 @@ int main()
                         total = total-(total*0.15);
                         }
                         // inicio a crear factura
+                        division();
                         iniciofactura();
                         guardarfactura();
                         numerodefactura++;
